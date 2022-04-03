@@ -2,75 +2,70 @@ import styled from "styled-components";
 import Banner from "../components/Banner";
 import PortfolioData from "../portfolioData";
 import { NavLink, useParams } from "react-router-dom";
-import { useState } from 'react';
 
 const PortfolioPage = styled.div`
     width: 100%;
-    height: 130vh;
+    height: auto;
     background-color: #222;
+    display: flex;
+    flex-wrap : no-wrap;
+    padding: 30px 0;
 `
 
-const PortfolioMenu = styled.ul`
-  width: 100%;
-  margin: 0 auto;
-  margin-top 80px;
+const PortfolioMenu = styled.dl`
+  width: 300px;
   list-style : none;
   color: #fff;
-  display: flex;
-  justify-content:center;
   position: relative;
-  
-
-  & li{
-    display: table-cell;
-    vertical-align: middle;
+  padding-left: 30px;
+  box-sizing: border-box;
+  & dt{
     font-weight: bold;
-    height: 70px;
+    height: 40px;
     text-align: center;
-    padding: 0 30px;
-    border-left: 1px solid #222;
-    @media screen and (max-width:1200px){
-      font-size: 12px;
+    font-size: 18px;
+    border-bottom: 3px solid #6373ff;
+    margin-bottom: 20px;
+  }
+
+  & dd{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 15px;
+    & span {
+      font-weight: bold;
     }
-    @media screen and (max-width: 900px){
-      padding: 0 10px;
-    }
-    
   }
 `
 
 export const PortfolioContainer = styled.div`
-  width: 100%;
+  width: 80%;
   height: 600px;
-  margin-top: 100px;
+  margin: 0 auto;
   background : url(${props => props.Bgimg}) no-repeat top/cover;
-  position: relative;
   & div{
-    position: absolute;
-    width: 500px;
-    height: inherit;
-    background-color: rgba(0,0,0,0.7);
-    top : 0; left: 10%;
-    transition: all 0.1s ease;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
     color: #fff;
+    padding: 50px;
+    font-weight: bold;
+    box-sizing: border-box;
     & h3{
-      margin-top: 30px 50px;
+      margin-top: 50px 50px;
       font-size: 2rem;
-      padding: 50px;
+      padding: 20px;
     }
     & p{
       padding: 30px 50px;
       white-space: pre-line;
-      font-size:18px;
+      font-size:20px;
     }
     & span{
       padding: 50px;
-      color: #6373ff;
-      font-size: 14px;
-    }
-
-    @media screen and (max-width:1200px){
-      width: 80%;
+      color: red;
+      font-size: 18px;
     }
   }
 `
@@ -81,25 +76,31 @@ const Portfolio = () => {
   const { id } = useParams();
 
     return (
+      <>
+      <Banner />
+      
       <PortfolioPage>
-        <Banner/>
         <PortfolioMenu>
+          <dt>Portfolio</dt>
           {
             PortfolioData.map((data) => {
               return (
                 <NavLink 
                   to={data.id} 
                   key={data.id}
-                  style={({isActive}) => (isActive ? {backgroundColor:"#6373ff"} : {backgroundColor: "#aaa"})}
+                  style={({isActive}) => (isActive ? {color:"#6373ff"} : {color: "#aaa"})}
                 >
-                  <li>{data.title}</li>
+                  <dd>
+                    {data.title}
+                    <span style={data.code==='독학' ? { color:"orange"} : { color : "green"}}> - {data.code}</span>
+                  </dd>
                 </NavLink>
               )
             })
           }
         </PortfolioMenu>
-        <a href={PortfolioData[id].page} target="_blank" rel="noreferrer">
           <PortfolioContainer Bgimg={PortfolioData[id].url}>
+        <a href={PortfolioData[id].page} target="_blank" rel="noreferrer">
             <div>
               <h3>{PortfolioData[id].title}</h3>
               <p>{PortfolioData[id].info}</p>
@@ -107,9 +108,10 @@ const Portfolio = () => {
               <p>기여도 : {PortfolioData[id].contri}</p>
               <span>{PortfolioData[id].message}</span>
             </div>
-          </PortfolioContainer>
         </a>  
+          </PortfolioContainer>
       </PortfolioPage>
+      </>
     )
 }
 
