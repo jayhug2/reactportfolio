@@ -10,6 +10,9 @@ const PortfolioPage = styled.div`
     display: flex;
     flex-wrap : no-wrap;
     padding: 30px 0;
+    @media screen and (max-width:1000px){
+      height: 100vh;
+    }
 `
 
 const PortfolioMenu = styled.dl`
@@ -19,6 +22,10 @@ const PortfolioMenu = styled.dl`
   position: relative;
   padding-left: 30px;
   box-sizing: border-box;
+  @media screen and (max-width: 1000px){
+    width: 100%;
+    padding-right: 30px;
+  }
   & dt{
     font-weight: bold;
     height: 40px;
@@ -35,6 +42,14 @@ const PortfolioMenu = styled.dl`
     font-size: 15px;
     & span {
       font-weight: bold;
+    }
+    & .links {
+      position: absolute;
+      right: 10%;
+      display: none;
+      @media screen and (max-width:1000px){
+        display: inline;
+      }
     }
   }
 `
@@ -67,6 +82,10 @@ export const PortfolioContainer = styled.div`
       color: red;
       font-size: 18px;
     }
+    
+  }
+  @media screen and (max-width:1000px){
+    display: none;
   }
 `
 
@@ -74,6 +93,10 @@ export const PortfolioContainer = styled.div`
 
 const Portfolio = () => {
   const { id } = useParams();
+  const pageLink = (e) => {
+    let linkNo = e.target.attributes[1].value;
+    window.open(PortfolioData[linkNo].page)
+  }
 
     return (
       <>
@@ -93,6 +116,7 @@ const Portfolio = () => {
                   <dd>
                     {data.title}
                     <span style={data.code==='독학' ? { color:"orange"} : { color : "green"}}> - {data.code}</span>
+                    <span className="links" data-link={data.id} onClick={pageLink}>Link</span>
                   </dd>
                 </NavLink>
               )

@@ -27,6 +27,7 @@ const Mystory = styled.h4`
   font-size: 14px;
   text-align: center;
   line-height: 22px;
+  padding: 0 5px;
 `
 const Profile = styled.ul`
   width:100%;
@@ -43,15 +44,13 @@ const Profile = styled.ul`
     }
     & h4{
       color: #6373ff;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      padding-left: 50px;
+      text-align: center;
     }
     & span{
       display: block;
-      margin-right: 10px;
-      font-size: 1.3rem;
-      padding: 5px 0 5px 50px;
+      text-align: center;
     }
   }
 `

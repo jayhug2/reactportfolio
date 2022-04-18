@@ -16,7 +16,7 @@ const MenuContainer = styled.ul`
     list-style: none;
 `
 const Menus = styled.li`
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #fff;
     cursor:pointer;
     height:10vh;
@@ -27,7 +27,7 @@ const Menus = styled.li`
     a{ padding: 2.5vh; }
     &:hover{ border-bottom: 5px solid #6373ff; }
     @media screen and (max-width:900px){
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 `
 
